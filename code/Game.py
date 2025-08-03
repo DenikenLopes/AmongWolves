@@ -6,9 +6,10 @@ class Game:
         pygame.init()
         self.window = pygame.display.set_mode(size=(800, 479))
     
-    def run(self):               
-        while True:
-            menu = Menu(self.window)
+    def run(self):   
+        menu = Menu(self.window)    
+                
+        while True:        
             menu.run()
             pass
             
