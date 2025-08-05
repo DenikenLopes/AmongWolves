@@ -1,3 +1,9 @@
 MENU_OP=('N E W   G A M E',
          'S A V E G A M E',
          'E X I T')
+
+COR_YELLOW = (245, 219, 36)
+COR_WHITE = (255, 255, 255)
+
+WIDTH = 800
+HEIGHT = 479
