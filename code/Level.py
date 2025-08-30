@@ -6,28 +6,22 @@ from code.Const import WIDTH
 class Level:
     
     def __init__(self, window):
-        self.window = window
-        
-        # salvando todas as camadas do cenário em uma lista
-        self.camada = []
-        self.camada.append(pygame.image.load('./asset/back0.png'))
-        self.camada.append(pygame.image.load('./asset/back1.png'))
-        self.camada.append(pygame.image.load('./asset/back2.png'))
-        self.camada.append(pygame.image.load('./asset/back3.png'))
-        self.camada.append(pygame.image.load('./asset/back4.png'))
-        self.camada.append(pygame.image.load('./asset/back5.png'))
-        
+        self.window = window        
         self.entity_list: list[Entity] = []  #adiciona em uma lista as entidades: inimigos, cenário, personagem
         self.entity_list.extend(EntityFactory.get_entity('back'))
+        self.entity_list.extend(EntityFactory.get_entity('p'))
+        self.entity_list.append(EntityFactory.get_entity('Enemy'))
 
         #self.surf = camada[0]
         #self.surf = pygame.image.load('./asset/back1.png')
                 
     def run(self):
-        #mov = 0
+        clock = pygame.time.Clock()
         while True:
+            clock.tick(60)
             
             for ent in self.entity_list:
+            
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
             
@@ -40,6 +34,17 @@ class Level:
             pygame.display.flip()
             
             '''
+             # salvando todas as camadas do cenário em uma lista
+        self.camada = []
+        self.camada.append(pygame.image.load('./asset/back0.png'))
+        self.camada.append(pygame.image.load('./asset/back1.png'))
+        self.camada.append(pygame.image.load('./asset/back2.png'))
+        self.camada.append(pygame.image.load('./asset/back3.png'))
+        self.camada.append(pygame.image.load('./asset/back4.png'))
+        self.camada.append(pygame.image.load('./asset/back5.png'))
+            
+            
+            
             #código paralax         
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

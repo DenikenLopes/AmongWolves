@@ -8,17 +8,20 @@ class Background(Entity):
     def __init__(self, name, position):
         super().__init__(name, position)
     
-    def move(self, ):
+    def move(self,):
+        
+        if self.rect.right <= 0:
+            self.rect.left = WIDTH
         
         teclas = pygame.key.get_pressed()
                                   
         if teclas[pygame.K_RIGHT]:
-                self.rect.centerx -= SPEED[self.name]
-        if teclas[pygame.K_LEFT]:
-                self.rect.centerx += SPEED[self.name]
+                    self.rect.centerx -= SPEED[self.name]
+        if teclas[pygame.K_LEFT]:# and self.rect.left<0:
+                    self.rect.centerx += SPEED[self.name]
+       
         
-        if self.rect.right <= 0:
-            self.rect.left = WIDTH           
+                
             
             
             
