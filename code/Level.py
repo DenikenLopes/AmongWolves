@@ -1,10 +1,14 @@
 import pygame.image
+from code.Entity import Entity
+from code.EntityFactory import EntityFactory
 from code.Const import WIDTH
 
 class Level:
     
     def __init__(self, window):
         self.window = window
+        
+        # salvando todas as camadas do cenário em uma lista
         self.camada = []
         self.camada.append(pygame.image.load('./asset/back0.png'))
         self.camada.append(pygame.image.load('./asset/back1.png'))
@@ -12,15 +16,31 @@ class Level:
         self.camada.append(pygame.image.load('./asset/back3.png'))
         self.camada.append(pygame.image.load('./asset/back4.png'))
         self.camada.append(pygame.image.load('./asset/back5.png'))
+        
+        self.entity_list: list[Entity] = []  #adiciona em uma lista as entidades: inimigos, cenário, personagem
+        self.entity_list.extend(EntityFactory.get_entity('back'))
 
         #self.surf = camada[0]
         #self.surf = pygame.image.load('./asset/back1.png')
                 
     def run(self):
-        mov = 0
+        #mov = 0
         while True:
             
-                     
+            for ent in self.entity_list:
+                self.window.blit(source=ent.surf, dest=ent.rect)
+                ent.move()
+            
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                    
+            pygame.display.flip()
+            
+            '''
+            #código paralax         
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -49,5 +69,5 @@ class Level:
                 self.rect = image2.get_rect(left=WIDTH+mov*i,top=0)
                 self.window.blit(source=image2, dest=self.rect)
                             
-            
-            pygame.display.flip()
+            '''
+           
