@@ -11,12 +11,16 @@ class Level:
         self.entity_list.extend(EntityFactory.get_entity('back'))
         self.entity_list.extend(EntityFactory.get_entity('Enemy'))
         self.entity_list.extend(EntityFactory.get_entity('p'))
+        pygame.mixer.init()
+        music = pygame.mixer.Sound('./audio/Bosch_Garden.mp3')
+        music.play(-1)
         
                 
     def run(self):
         clock = pygame.time.Clock()    
         while True:
             clock.tick(60)
+            
             
             teclas = pygame.key.get_pressed()
             direction = 0
