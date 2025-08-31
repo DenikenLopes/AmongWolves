@@ -1,7 +1,7 @@
 import pygame.image
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
-from code.Const import WIDTH
+
 
 class Level:
     
@@ -9,21 +9,37 @@ class Level:
         self.window = window        
         self.entity_list: list[Entity] = []  #adiciona em uma lista as entidades: inimigos, cenário, personagem
         self.entity_list.extend(EntityFactory.get_entity('back'))
+        self.entity_list.extend(EntityFactory.get_entity('Enemy'))
         self.entity_list.extend(EntityFactory.get_entity('p'))
-        self.entity_list.append(EntityFactory.get_entity('Enemy'))
-
-        #self.surf = camada[0]
-        #self.surf = pygame.image.load('./asset/back1.png')
+        
                 
     def run(self):
-        clock = pygame.time.Clock()
+        clock = pygame.time.Clock()    
         while True:
             clock.tick(60)
+            
+            teclas = pygame.key.get_pressed()
+            direction = 0
+            if teclas[pygame.K_RIGHT]:
+                direction = 1
+            elif teclas[pygame.K_LEFT]:
+                direction = -1
             
             for ent in self.entity_list:
             
                 self.window.blit(source=ent.surf, dest=ent.rect)
-                ent.move()
+                
+                # só background recebe direction
+                from code.Background import Background
+                from code.Enemy import Enemy
+                if isinstance(ent, Background):
+                    ent.move(direction)
+                elif isinstance(ent, Enemy):
+                    ent.move(direction)
+                else:
+                    ent.move()
+                
+                
             
             
             for event in pygame.event.get():

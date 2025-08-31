@@ -14,7 +14,7 @@ class EntityFactory:
                 listBack = []
                 for i in range(6):
                     listBack.append(Background(f'back{i}', (0,0)))
-                    listBack.append(Background(f'back{i}', (WIDTH,0)))
+                    listBack.append(Background(f'back{i}', (WIDTH-1,0)))
                 return listBack
             
             case 'p':
@@ -28,6 +28,9 @@ class EntityFactory:
                 return [Player(sprites["right"][0], rect, sprites)]
             
             case 'Enemy':
-                return Enemy('Enemy0', (WIDTH-200, 285))
-                
-                    
+                position = (WIDTH-200, 275)
+                sprites = {
+                    "walk": [pygame.image.load(f"./asset/enemy/Enemy{i}.png").convert_alpha() for i in range(5)],
+                    #"stop": [pygame.image.load("./asset/enemy/enemy_stop.png").convert_alpha()],
+                }
+                return [Enemy('enemy0', position, sprites)]

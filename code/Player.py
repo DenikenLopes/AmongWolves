@@ -1,4 +1,5 @@
 from code.Entity import Entity
+from code.Const import COR_WHITE, WIDTH
 import pygame
 
 class Player(Entity):
@@ -12,6 +13,7 @@ class Player(Entity):
         self.animation_speed = 0.20
         self.position = (40, 250)
         self.last_key = "right"
+        #self.font = pygame.font.Font('./fonte/chinese_rocks_rg.otf', 32)
         
 
         
@@ -22,16 +24,40 @@ class Player(Entity):
         moved = False
 
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.rect.x -= 5
+            if self.rect.x == 4:
+                self.rect.x = 4
+            else:
+                self.rect.x -= 5
+            
             self.direction = "left"
             self.last_key = "left"
+            #print('left: ', self.rect.x)
             moved = True
         elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.rect.x += 5
+            if self.rect.x == 649:
+                self.rect.x = 649
+            else:
+                self.rect.x += 5
+            
             self.direction = "right"
             self.last_key = "right"
+            #print('right: ', self.rect.x)
+            moved = True
+        elif keys[pygame.K_UP]:
+            if self.rect.y == 218:
+                self.rect.y = 218 
+            else:
+                self.rect.y -= 5
             moved = True
         
+        elif keys[pygame.K_DOWN]:
+            if self.rect.y == 298:
+                self.rect.y = 298 
+            else:
+                self.rect.y += 5
+            moved = True
+        
+        #position = (40, 350)
         
 
         # animação

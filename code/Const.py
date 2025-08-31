@@ -14,6 +14,5 @@ SPEED = {
     'back2':2,
     'back3':3,
     'back4':4,
-    'back5':5,
-    
+    'back5':5 
 }
